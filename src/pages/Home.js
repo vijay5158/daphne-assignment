@@ -8,10 +8,11 @@ import '../styles/Home.css';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Piechart from '../components/Piechart';
-
+import Placeholder from '../components/Placeholder';
 
 const Home = () => {
-    const [prodData, setProdData] = useState([])
+const [loading, setLoading] = useState(false)
+  const [prodData, setProdData] = useState([])
     const [categories, setCategories] = useState([])
     const [category, setCategory] = useState(null)
     const [show, setShow] = useState(false);
@@ -19,25 +20,33 @@ const Home = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const getData = ()=>{
+      setLoading(true)
         axios.get('https://fakestoreapi.com/products')
         .then((res)=>{
             const data  = res.data
             
             setProdData(data)
+            setLoading(false)
         })
         .catch((err)=>{
+          setLoading(false)
+
             console.log(err);
         })
+
     }
     const getCategoryData = ()=>{
-        axios.get('https://fakestoreapi.com/products/categories')
+        
+      axios.get('https://fakestoreapi.com/products/categories')
         .then((res)=>{
             const data  = res.data
             
             setCategories(data)
+
         })
         .catch((err)=>{
             console.log(err);
+
         })
     }
 
@@ -64,12 +73,19 @@ getCategoryData();
       </Container>
     </Navbar>    
     <div className="main-container">
-        {!category ? 
+{loading? 
+<>
+<Placeholder />
+<Placeholder />
+<Placeholder />
+<Placeholder />
+</>
+:        !category ? 
         prodData.map((data,index)=> <ProductCard key={index} data={data} />)
     :
     prodData.filter((prod)=> prod.category===category).map((data,index)=> <ProductCard key={index} data={data} />)
-    }
-        
+    
+  }
     </div>
     <button onClick={handleShow} className="analyse-btn">ANALYSE</button>
     <Modal
