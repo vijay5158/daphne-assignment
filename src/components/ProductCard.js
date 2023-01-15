@@ -15,7 +15,7 @@ const handleReadLess = ()=>{
 <div className="card-div card">
     <div className="upr-card-div">
         <div className="img-div">
-            <img src={props.data.image} alt="card image" className="card-img " />
+            <img src={props.data.image} alt="card" className="card-img " />
         </div>
         <p className="card-category">{props.data.category}</p>
     </div>

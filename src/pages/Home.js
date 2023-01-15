@@ -6,7 +6,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import ProductCard from '../components/ProductCard';
 import '../styles/Home.css';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Piechart from '../components/Piechart';
 
